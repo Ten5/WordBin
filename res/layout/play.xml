@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/back"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    tools:ignore="HardcodedText" >
+
+    <ViewFlipper
+        android:id="@+id/details"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="UselessParent" >
+
+	    <LinearLayout
+	        android:id="@+id/linear1"
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent"
+	        android:background="#e67e22"
+	        android:gravity="center"
+	        android:orientation="vertical" >
+	
+	        <TextView
+	            android:id="@+id/tv_city1"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="center_horizontal"
+	            android:text="Do you know the meaning of this word?"
+	            android:textColor="#ffffff"
+	            android:textSize="26sp"
+	            android:gravity="center"
+	            android:textStyle="bold" >
+	        </TextView>
+	
+	        <TextView
+	            android:id="@+id/tv_word"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:gravity="center"
+	            android:layout_marginTop="15dp"
+	            android:layout_marginBottom="20dp"
+	            android:textColor="#ffffff"
+	            android:textSize="20sp" >
+	        </TextView>
+	
+	        <Button
+	            android:id="@+id/Button_next"
+	            android:layout_width="250dp"
+	            android:layout_height="55dp"
+	            android:text="Let's check it."
+	            android:layout_gravity="center"
+	            android:textColor="#ffffff"
+	            android:textSize="18sp" >
+	        </Button>
+	    </LinearLayout>
+	
+	    <LinearLayout
+	        android:id="@+id/linear2"
+	        android:layout_width="match_parent"
+	        android:layout_height="fill_parent"
+	        android:background="#000fff"
+	        android:gravity="center"
+	        android:orientation="vertical" >
+	
+	        <TextView
+	            android:id="@+id/tv_city2"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:text="Here is the meaning!"
+	            android:gravity="center"
+	            android:textColor="#ffffff"
+	            android:textSize="26sp"
+	            android:textStyle="bold" >
+	        </TextView>
+	
+	        <TextView
+	            android:id="@+id/tv_meaning"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:textColor="#ffffff"
+	            android:gravity="center"
+	            android:layout_marginTop="15dp"
+	            android:layout_marginBottom="20dp"
+	            android:textSize="20sp" >
+	        </TextView>
+	
+	        <Button
+	            android:id="@+id/Button_previous"
+	            android:layout_width="250dp"
+	            android:layout_height="55dp"
+	            android:layout_gravity="center"
+	            android:text="Ok! I got it."
+	            android:textColor="#ffffff"
+	            android:textSize="18sp" >
+	        </Button>
+	    </LinearLayout>
+	</ViewFlipper>
+</LinearLayout>
