@@ -58,16 +58,20 @@ public class SignInOrUpTask extends AsyncTask<String,Void,String> {
 	   }
 	   
 	   @Override
-	   protected void onPostExecute(String result) {
-	      Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
+	   protected void onPostExecute(String result) {	      
 	      if(result.equalsIgnoreCase("Signed Up Successfully. Logging you in..") || result.equalsIgnoreCase("Success")) {
 	    	 condition=1;
-	    	 Intent i=new Intent(context, SelectActivity.class);	    	 
+	    	 Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
+	    	 Intent i=new Intent(context, SelectActivity.class);	 
 	    	 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 	    	 i.putExtra("Username", username);
 	    	 context.startActivity(i);
 	    	 sa.finishActivity();
 	      }
+	      else if(result.equalsIgnoreCase("Values Inserted Successfully"))
+	    	  Toast.makeText(context, "Signed Up Successfully", Toast.LENGTH_SHORT).show();
+	      else
+	    	  Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
 	   }
 	   
 	   public String signInOrUp(String link, String username, String password) {

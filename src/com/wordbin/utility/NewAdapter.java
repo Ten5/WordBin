@@ -12,9 +12,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
+import android.view.animation.AnimationUtils;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
@@ -26,8 +26,7 @@ import android.widget.TextView;
 public class NewAdapter extends BaseAdapter  {
 
 	Context context;
-	ArrayList<SingleRow> data;	
-	TextView word, meaning;
+	ArrayList<SingleRow> data;
 	CheckBox bookmark;
 	String user;
 
@@ -97,47 +96,35 @@ public class NewAdapter extends BaseAdapter  {
 		holder.meaning.setText(temp.meaning);	
 		holder.bookmark.setChecked(temp.getBookmark());
 		
-		holder.word.setOnClickListener(new OnClickListener() {
+		holder.word.setOnTouchListener(new OnSwipeTouchListener(context) {
 			
 			@Override
-			public void onClick(View v) {
-				holder.word.setVisibility(View.INVISIBLE);
+		    public void onSwipeRight() {
+		        holder.meaning.setAnimation(AnimationUtils.loadAnimation(context, R.anim.left_in));		        
+		        holder.word.setAnimation(AnimationUtils.loadAnimation(context, R.anim.right_out));
+		        holder.bookmark.setAnimation(AnimationUtils.loadAnimation(context, R.anim.right_out));
+		        holder.word.setVisibility(View.INVISIBLE);
 				holder.meaning.setVisibility(View.VISIBLE);
 				holder.bookmark.setVisibility(View.INVISIBLE);
-			}
-		});
-		
-		holder.word.setOnLongClickListener(new OnLongClickListener() {
-
-			@Override
-			public boolean onLongClick(View v) {
-				Intent i = new Intent(context, Edit.class);
-				SQLiteDatabase wordTable = context.openOrCreateDatabase("Words", 0, null);
-				Cursor c = wordTable.rawQuery("select sentence from wordTable where word = '"+holder.word.getText().toString().trim()+"'", null);
-				c.moveToNext();
-				i.putExtra("word", holder.word.getText().toString().trim());
-				i.putExtra("meaning", holder.meaning.getText().toString().trim());
-				i.putExtra("sentence", c.getString(0));
-				i.putExtra("Username", user);
-				context.startActivity(i);
-				return false;
-			}
-		});
-		
-		holder.meaning.setOnClickListener(new OnClickListener() {
+		    }
 			
 			@Override
-			public void onClick(View v) {
-				holder.word.setVisibility(View.VISIBLE);
-				holder.meaning.setVisibility(View.INVISIBLE);
-				holder.bookmark.setVisibility(View.VISIBLE);
-			}
-		});
-		
-		holder.meaning.setOnLongClickListener(new OnLongClickListener() {
-
+		    public void onSwipeLeft() {
+		    	holder.meaning.setAnimation(AnimationUtils.loadAnimation(context, R.anim.right_in));  
+		        holder.word.setAnimation(AnimationUtils.loadAnimation(context, R.anim.left_out));
+		        holder.bookmark.setAnimation(AnimationUtils.loadAnimation(context, R.anim.left_out));
+		        holder.word.setVisibility(View.INVISIBLE);
+				holder.meaning.setVisibility(View.VISIBLE);
+				holder.bookmark.setVisibility(View.INVISIBLE);
+		    }
+			
 			@Override
-			public boolean onLongClick(View v) {
+			public boolean onTouch(View v, MotionEvent event) {				
+				return gestureDetector.onTouchEvent(event);
+			}
+			
+			@Override
+			public void onSingleTap() {
 				Intent i = new Intent(context, Edit.class);
 				SQLiteDatabase wordTable = context.openOrCreateDatabase("Words", 0, null);
 				Cursor c = wordTable.rawQuery("select sentence from wordTable where word = '"+holder.word.getText().toString().trim()+"'", null);
@@ -147,8 +134,48 @@ public class NewAdapter extends BaseAdapter  {
 				i.putExtra("sentence", c.getString(0));
 				i.putExtra("Username", user);
 				context.startActivity(i);
-				return false;
-			}						
+			}
+		});
+		
+		holder.meaning.setOnTouchListener(new OnSwipeTouchListener(context) {
+			
+			@Override
+		    public void onSwipeRight() {
+		        holder.meaning.setAnimation(AnimationUtils.loadAnimation(context, R.anim.right_out));		        
+		        holder.word.setAnimation(AnimationUtils.loadAnimation(context, R.anim.left_in));
+		        holder.bookmark.setAnimation(AnimationUtils.loadAnimation(context, R.anim.left_in));
+		        holder.word.setVisibility(View.VISIBLE);
+				holder.meaning.setVisibility(View.INVISIBLE);
+				holder.bookmark.setVisibility(View.VISIBLE);
+		    }
+			
+			@Override
+		    public void onSwipeLeft() {
+		    	holder.meaning.setAnimation(AnimationUtils.loadAnimation(context, R.anim.left_out));  
+		        holder.word.setAnimation(AnimationUtils.loadAnimation(context, R.anim.right_in));
+		        holder.bookmark.setAnimation(AnimationUtils.loadAnimation(context, R.anim.right_in));
+		        holder.word.setVisibility(View.VISIBLE);
+				holder.meaning.setVisibility(View.INVISIBLE);
+				holder.bookmark.setVisibility(View.VISIBLE);
+		    }
+			
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {				
+				return gestureDetector.onTouchEvent(event);
+			}
+			
+			@Override
+			public void onSingleTap() {
+				Intent i = new Intent(context, Edit.class);
+				SQLiteDatabase wordTable = context.openOrCreateDatabase("Words", 0, null);
+				Cursor c = wordTable.rawQuery("select sentence from wordTable where word = '"+holder.word.getText().toString().trim()+"'", null);
+				c.moveToNext();
+				i.putExtra("word", holder.word.getText().toString().trim());
+				i.putExtra("meaning", holder.meaning.getText().toString().trim());
+				i.putExtra("sentence", c.getString(0));
+				i.putExtra("Username", user);
+				context.startActivity(i);
+			}
 		});
 
 	    holder.bookmark.setOnCheckedChangeListener(new OnCheckedChangeListener() {
