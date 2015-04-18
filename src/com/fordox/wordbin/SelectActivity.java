@@ -76,11 +76,14 @@ public class SelectActivity extends Activity {
 					Toast.makeText(SelectActivity.this, "Please Download Database to begin!", Toast.LENGTH_SHORT).show();
 					return;
 				}
-				@SuppressWarnings("unused")
+				
 				Cursor c=null;
-
 				try {
 					c= db.rawQuery("select * from wordTable order by word", null);
+					if(c.getCount()==0) {
+						Toast.makeText(SelectActivity.this, "Please Download Database to begin!", Toast.LENGTH_SHORT).show();
+						return;
+					}						
 				}
 				catch(Exception e) {
 					Toast.makeText(getApplicationContext(), "Please Download Database to begin..", Toast.LENGTH_LONG).show();
@@ -164,7 +167,7 @@ public class SelectActivity extends Activity {
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
        // Inflate the menu; this adds items to the action bar if it is present.	
-       getMenuInflater().inflate(R.menu.main, menu);
+       getMenuInflater().inflate(R.menu.select_activity_menu, menu);
        return true;
     }
 	
@@ -173,7 +176,9 @@ public class SelectActivity extends Activity {
 		if(item.getItemId()==android.R.id.home)
 			finish();
 		if(item.getItemId()==R.id.About)
-			credits();		
+			credits();
+		if(item.getItemId()==R.id.Clear)
+			clearDatabase();
 		return super.onOptionsItemSelected(item);
 	}
 	
@@ -193,4 +198,30 @@ public class SelectActivity extends Activity {
     	AlertDialog dialog = builder.create();
     	dialog.show();
     }
+	
+	private void clearDatabase() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    	builder.setTitle("Confirm Clear")
+    	       .setMessage("Are you sure you want to clear the bin?");
+    	builder.setPositiveButton("Don't Clear", new DialogInterface.OnClickListener() {
+    	           public void onClick(DialogInterface dialog, int id) {
+    	        	   dialog.cancel();
+    	           }
+    	       });
+    	builder.setNegativeButton("Clear Bin", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				String sql_delete = "delete from wordTable";
+			    try {
+		    	   db.execSQL(sql_delete);
+		    	   Toast.makeText(SelectActivity.this, "Bin Cleared", Toast.LENGTH_SHORT).show();
+		       } catch(Exception e) {
+		    	   Toast.makeText(SelectActivity.this, "Failed to clear the bin", Toast.LENGTH_SHORT).show();
+		       }
+			}
+		});
+    	AlertDialog dialog = builder.create();
+    	dialog.show();	
+	}
 }

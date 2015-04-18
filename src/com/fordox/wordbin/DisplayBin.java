@@ -1,7 +1,5 @@
 package com.fordox.wordbin;
 
-import com.wordbin.utility.NewAdapter;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -10,10 +8,13 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.wordbin.utility.NewAdapter;
 
 public class DisplayBin extends Activity {
 	
@@ -23,6 +24,8 @@ public class DisplayBin extends Activity {
 	SQLiteDatabase word;
 	NewAdapter adapter;
 	String user;
+	private static final String LIST_STATE = "listState";
+	private Parcelable mListState = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -96,13 +99,16 @@ public class DisplayBin extends Activity {
 	
 	@Override
 	protected void onResume() {
-		super.onResume();
+		super.onResume();	    
 		SharedPreferences sp =  getSharedPreferences("Bookmarks", MODE_PRIVATE);
 		for(int i=0; i < arr.length; i++)
 			marks[i] = sp.getBoolean("bookmark"+i, false);
 		
 		adapter = new NewAdapter(DisplayBin.this, arr, meaning, marks, user);
 		list.setAdapter(adapter);
+		if (mListState != null)
+	        list.onRestoreInstanceState(mListState);
+	    mListState = null;
 	}
 	
 	@Override
@@ -116,4 +122,17 @@ public class DisplayBin extends Activity {
 			ed.putBoolean("bookmark"+i, bookmarks[i]);
 		ed.commit();
     }
+	
+	@Override
+	protected void onRestoreInstanceState(Bundle state) {
+	    super.onRestoreInstanceState(state);
+	    mListState = state.getParcelable(LIST_STATE);
+	}
+	
+	@Override
+	protected void onSaveInstanceState(Bundle state) {
+	    super.onSaveInstanceState(state);
+	    mListState = list.onSaveInstanceState();
+	    state.putParcelable(LIST_STATE, mListState);
+	}
 }
