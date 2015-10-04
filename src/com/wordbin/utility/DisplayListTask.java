@@ -25,7 +25,7 @@ public class DisplayListTask extends AsyncTask<String, Void, String> {
 			meaning_List = new ArrayList<CharSequence>(), 
 			sentence_List = new ArrayList<CharSequence>();
 	SQLiteDatabase word;
-String user;
+	String user;
 	public DisplayListTask(Context context, String user) {
 		this.context = context;
 		this.user =user;
@@ -66,7 +66,7 @@ String user;
 			}
 		} catch (Exception e)	{
 			Log.e("Error", "" + e);
-			Toast.makeText(context,"Error" +e.getMessage(), Toast.LENGTH_LONG).show();
+			Toast.makeText(context, "Error in retrieving updated list!", Toast.LENGTH_LONG).show();
 		}
 		Intent i = new Intent(context, DisplayBin.class);
 		i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

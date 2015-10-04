@@ -3,6 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools" 
     tools:ignore="HardcodedText,UselessParent,ButtonStyle,RtlHardcoded" >
     
-    <item android:id="@+id/count" android:showAsAction="always" android:title="Total Words: "></item>
-    
+    <item android:id="@+id/search" 
+        android:icon="@drawable/ic_search"
+        android:actionViewClass="android.widget.SearchView" 
+        android:showAsAction="always" 
+        android:title="Search">
+    </item>
+    <item android:id="@+id/help" android:icon="@drawable/ic_action_question_mark" android:showAsAction="always" android:title="Help"></item>
+    <item android:id="@+id/count" android:showAsAction="ifRoom" android:title="Total Words: "></item>    
 </menu>

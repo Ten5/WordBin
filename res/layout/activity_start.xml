@@ -134,7 +134,7 @@
         android:gravity="bottom|center"
         android:text="WORD BIN"
         android:textColor="#ffffff"
-        android:textSize="40sp" />
+        android:textSize="38sp" />
 
     <TextView
         android:id="@+id/textView5"
@@ -142,10 +142,10 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/frameLayout1"
         android:layout_centerHorizontal="true"
-        android:gravity="top|center"
+        android:gravity="bottom|center"
         android:text="Play with Words!"
         android:textColor="#ffffff"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="10dp"
         android:textSize="15sp" />
 
 </RelativeLayout>

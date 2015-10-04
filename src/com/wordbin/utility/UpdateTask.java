@@ -18,12 +18,10 @@ public class UpdateTask  extends AsyncTask<String,Void,String> {
 
 	private Context context;
 	private EditText sentence;
-	int report_word;
 
-	public UpdateTask(Context context, EditText sentence,int report_word) {
+	public UpdateTask(Context context, EditText sentence) {
 		this.context = context;
 		this.sentence = sentence;
-		this.report_word=report_word;
 	}
 
 	@Override
@@ -38,7 +36,6 @@ public class UpdateTask  extends AsyncTask<String,Void,String> {
 			data += "&" + URLEncoder.encode("sentence", "UTF-8") + "=" + URLEncoder.encode(sentence, "UTF-8");
 			data += "&" + URLEncoder.encode("time", "UTF-8") + "=" + URLEncoder.encode(time, "UTF-8");
 			data += "&" + URLEncoder.encode("user", "UTF-8") + "=" + URLEncoder.encode(user, "UTF-8");
-			data += "&" + URLEncoder.encode("report", "UTF-8") + "=" + URLEncoder.encode(Integer.toString(report_word), "UTF-8");
 			
 			URL url = new URL(link);
 			URLConnection conn = url.openConnection(); 

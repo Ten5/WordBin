@@ -71,7 +71,7 @@ public class DownloadTask extends AsyncTask<String, Integer, String> {
 				String replaceSentence = json_object.getString("sentence").replace("'", "''");
 				String sql_insert = "insert into wordTable values('"+json_object.getString("word")+"','"
 						+replaceMeaning+"','"
-						+replaceSentence+"');";
+						+replaceSentence+"', 0);";
 				progress.setProgress((int) ( (double) i / totalCount) * 100);
 				try {
 					db.execSQL(sql_insert);

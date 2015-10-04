@@ -10,12 +10,21 @@
     android:paddingStart="?android:attr/listPreferredItemPaddingLeft"
     tools:ignore="RtlHardcoded" >
 	
+    <CheckBox
+	    android:id="@+id/check1"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:background="@drawable/bookmark_selector"
+    	android:button="@android:color/transparent"
+	    android:layout_alignBottom="@+id/text1"
+	    android:layout_alignParentLeft="true" />
+    
 	<TextView
 	    android:id="@+id/text1"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:layout_alignParentLeft="true"
-	    android:layout_toLeftOf="@+id/check1"
+	    android:layout_alignParentRight="true"
+	    android:layout_toRightOf="@id/check1"
 	    android:gravity="left|center_vertical"
 	    android:minHeight="?android:attr/listPreferredItemHeightSmall"
 	    android:paddingEnd="?android:attr/listPreferredItemPaddingRight"
@@ -41,14 +50,5 @@
 	    android:textAppearance="?android:attr/textAppearanceListItemSmall"
 	    android:clickable="true"
 	    android:visibility="gone" />
-
-	<CheckBox
-	    android:id="@+id/check1"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:background="@drawable/bookmark_selector"
-    	android:button="@android:color/transparent"
-	    android:layout_alignBottom="@+id/text1"
-	    android:layout_alignParentRight="true" />
 	
 </RelativeLayout>

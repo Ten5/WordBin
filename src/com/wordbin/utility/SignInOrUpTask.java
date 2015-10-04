@@ -50,7 +50,7 @@ public class SignInOrUpTask extends AsyncTask<String,Void,String> {
 	            String link="http://dbtest.webuda.com/Signin.php";
 	            StringBuilder sb = new StringBuilder();
 	            sb.append(signInOrUp(link, username, password));
-	            return sb.toString();	           
+	            return sb.toString();
 	         } catch(Exception e) {
 	        	 return new String("There is a problem with the network connection.\nPlease try again.");
 	         }
@@ -65,13 +65,22 @@ public class SignInOrUpTask extends AsyncTask<String,Void,String> {
 	    	 Intent i=new Intent(context, SelectActivity.class);	 
 	    	 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 	    	 i.putExtra("Username", username);
+	    	 i.putExtra("Connection", 1);
 	    	 context.startActivity(i);
 	    	 sa.finishActivity();
 	      }
 	      else if(result.equalsIgnoreCase("Values Inserted Successfully"))
 	    	  Toast.makeText(context, "Signed Up Successfully", Toast.LENGTH_SHORT).show();
-	      else
-	    	  Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
+	      else {
+    	  	String msg = "Improper network connection.\nLogging in as Guest.\nSome features may not work.";
+    	  	Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+    	  	Intent i=new Intent(context, SelectActivity.class);	 
+	    	i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+	    	i.putExtra("Username", "Guest");
+	    	i.putExtra("Connection", 0);
+	    	context.startActivity(i);
+	    	sa.finishActivity();
+	      }
 	   }
 	   
 	   public String signInOrUp(String link, String username, String password) {

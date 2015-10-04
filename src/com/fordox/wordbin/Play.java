@@ -138,8 +138,8 @@ public class Play extends Activity {
 	public void credits() {
     	AlertDialog.Builder builder = new AlertDialog.Builder(this);
     	builder.setTitle("Credits")
-    	       .setMessage("Word Bin" + "\nVersion 2.0" + "\n\nThis is a free app and has been built solely for the purpose of entertainment.\n"
-    	       		+ "Please do not reproduce this app for any monetory gains."
+    	       .setMessage("Word Bin" + "\nVersion 3.0" + "\n\nThis is a free app and has been built solely for the purpose of entertainment.\n"
+    	       		+ "Please do not reproduce this app for any monetory gain."
     	    		+ "\n\n©FordoX"
     	    		+ "\nContact us at: ten5dox@gmail.com");
     	builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {

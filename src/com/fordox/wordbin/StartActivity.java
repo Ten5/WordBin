@@ -83,7 +83,7 @@ public class StartActivity extends Activity {
 	    public boolean onOptionsItemSelected(MenuItem item) {
 		
 			if(item.getItemId()==R.id.About)
-				Toast.makeText(StartActivity.this, "Version 2.0\nDesigned by FordoX.\nAn app to help learn new words in an interesting way.",Toast.LENGTH_LONG).show();
+				Toast.makeText(StartActivity.this, "Version 3.0\nDesigned by FordoX.\nAn app to help learn new words in an interesting way.",Toast.LENGTH_LONG).show();
 			
 			return super.onOptionsItemSelected(item);
 		}

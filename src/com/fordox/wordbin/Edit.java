@@ -1,7 +1,6 @@
 package com.fordox.wordbin;
 
-import com.wordbin.utility.UpdateTask;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -14,12 +13,17 @@ import android.text.format.Time;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.wordbin.utility.ReportTask;
+import com.wordbin.utility.UpdateTask;
 
 public class Edit extends Activity {
 
@@ -39,6 +43,7 @@ public class Edit extends Activity {
 		edit = (Button)findViewById(R.id.editButton);
 		save = (Button)findViewById(R.id.saveButton);
 		report = (Button)findViewById(R.id.report);
+		report.setEnabled(true);
 		Typeface faceHomestead = Typeface.createFromAsset(getAssets(), "fonts/Homestead-Regular.ttf");
 		edit.setTypeface(faceHomestead);
 		save.setTypeface(faceHomestead);
@@ -71,12 +76,41 @@ public class Edit extends Activity {
 				imm.showSoftInput(sentence, InputMethodManager.SHOW_IMPLICIT);
 			}					
 		});
+		
 		report.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				report_word=1;
+				AlertDialog.Builder builder = new AlertDialog.Builder(Edit.this);
+				builder.setTitle("Report")
+				.setMessage("Are you sure you want to report the word / sentence?");
+				builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						report_word = 1;
+						String wordString = word.getText().toString().trim();						
+						new ReportTask(Edit.this, report_word).execute(wordString);
+						dialog.dismiss();
+					}
+				});
+				builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						dialog.cancel();
+					}
+				});
+				AlertDialog dialog = builder.create();
+				dialog.show();
 			}					
+		});
+		
+		save.setOnTouchListener(new OnTouchListener() {
+			
+			@SuppressLint("ClickableViewAccessibility")
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if(!save.isClickable())
+					Toast.makeText(Edit.this, "No changes to save.", Toast.LENGTH_SHORT).show();
+				return false;
+			}
 		});
 
 		save.setOnClickListener(new OnClickListener() {
@@ -105,14 +139,13 @@ public class Edit extends Activity {
 					Log.e("------EDIT FAILED--------", e.getMessage());
 				}
 				db.close();
-				new UpdateTask(Edit.this, sentence,report_word).execute(wordString, meaningString, sentenceString,user,time);
+				new UpdateTask(Edit.this, sentence).execute(wordString, meaningString, sentenceString, user, time);
 			}
 		});
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.	
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
@@ -128,8 +161,8 @@ public class Edit extends Activity {
 	public void credits() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle("Credits")
-		.setMessage("Word Bin" + "\nVersion 2.0" + "\n\nThis is a free app and has been built solely for the purpose of entertainment.\n"
-				+ "Please do not reproduce this app for any monetory gains."
+		.setMessage("Word Bin" + "\nVersion 3.0" + "\n\nThis is a free app and has been built solely for the purpose of entertainment.\n"
+				+ "Please do not reproduce this app for any monetory gain."
 				+ "\n\n©FordoX"
 				+ "\nContact us at: ten5dox@gmail.com");
 		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {

@@ -29,8 +29,8 @@
 		        android:layout_height="wrap_content"
 		        android:gravity="center"
 		        android:layout_gravity="center"
-		        android:layout_marginTop="15dp"  
-		        android:textSize="20sp"      
+		        android:layout_marginTop="30dp"  
+		        android:textSize="40sp"      
 		        android:textStyle="bold" 
 		        android:textColor="#ffffff"
 		        android:text="@string/Username" />                       
@@ -45,8 +45,8 @@
 		        android:hint="Username"
 		        android:textColor="#ffffff"
 		        android:background="@android:color/transparent"
-		        android:layout_marginTop="10dp"
-		        android:layout_marginBottom="15dp"
+		        android:layout_marginTop="20dp"
+		        android:layout_marginBottom="30dp"
 		        android:ems="10" >
 		    </EditText>		    
 		
@@ -57,8 +57,8 @@
 		        android:gravity="center"
 		        android:layout_gravity="center"
 		        android:textStyle="bold"
-		        android:layout_marginTop="10dp"
-		        android:textSize="20sp"
+		        android:layout_marginTop="20dp"
+		        android:textSize="40sp"
 		        android:textColor="#ffffff"
 		        android:text="@string/Password" />
 		    
@@ -72,18 +72,18 @@
 		        android:textColor="#ffffff"
 		        android:background="@android:color/transparent"
 		        android:ems="10"
-		        android:layout_marginTop="10dp"
-		        android:layout_marginBottom="15dp"
+		        android:layout_marginTop="20dp"
+		        android:layout_marginBottom="30dp"
 		        android:inputType="textPassword" >
 		    </EditText>
 
 		    <CheckBox
 		        android:id="@+id/checkBox1"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
+		        android:layout_width="180dp"
+		        android:layout_height="55dp"
 		        android:layout_gravity="center_horizontal"
 		        android:gravity="center"
-		        android:layout_marginBottom="10dp"
+		        android:layout_marginBottom="20dp"
 		        android:textColor="#ffffff"
 		        android:text="Remember Me" />
 
@@ -94,20 +94,22 @@
 
 		        <Button
 		            android:id="@+id/button2"
-		            android:layout_width="wrap_content"
-		            android:layout_height="wrap_content"
+		            android:layout_width="100dp"
+		            android:layout_height="80dp"
 		            android:onClick="signUp"
-		            android:layout_marginLeft="10dp"
+		            android:layout_marginLeft="20dp"
+		            android:textSize="20sp"
 		            android:text="Sign Up"
 		            android:textColor="#ffffff" />
 		        
 		        <Button
 		            android:id="@+id/button1"
-		            android:layout_width="wrap_content"
-		            android:layout_height="wrap_content"
+		            android:layout_width="100dp"
+		            android:layout_height="80dp"
 		            android:onClick="signIn"
 		            android:text="Sign In"
-		            android:layout_marginRight="10dp"
+		            android:textSize="20sp"
+		            android:layout_marginRight="20dp"
 		            android:textColor="#ffffff" />		        
 
 		    </LinearLayout>
@@ -121,7 +123,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:gravity="center"
-        android:textSize="12sp"
+        android:textSize="24sp"
         android:text="Copyright @ Fordox. All rights reserved."
         android:textColor="#ffffff" />
 
@@ -134,7 +136,7 @@
         android:gravity="bottom|center"
         android:text="WORD BIN"
         android:textColor="#ffffff"
-        android:textSize="40sp" />
+        android:textSize="80sp" />
 
     <TextView
         android:id="@+id/textView5"
@@ -145,7 +147,7 @@
         android:gravity="top|center"
         android:text="Play with Words!"
         android:textColor="#ffffff"
-        android:layout_marginBottom="30dp"
-        android:textSize="15sp" />
+        android:layout_marginBottom="60dp"
+        android:textSize="30sp" />
 
 </RelativeLayout>
